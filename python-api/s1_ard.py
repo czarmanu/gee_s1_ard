@@ -74,12 +74,13 @@ ee.Initialize()
 #// MAIN
 #/***************************/ 
 #Parameters
-parameter = {  'START_DATE': '2018-01-01',
-            'STOP_DATE': '2018-01-10',        
+parameter = {'START_DATE': '2016-08-01',
+            'STOP_DATE': '2016-09-01',        
             'POLARIZATION': 'VVVH',
             'ORBIT' : 'DESCENDING',
-            #'ORBIT_NUM': None,
-            'ROI': ee.Geometry.Rectangle([-47.1634, -3.00071, -45.92746, -5.43836]),
+            'PLATFORM_NUMBER' : 'A',
+            'ORBIT_NUM': None,
+            'ROI': ee.Geometry.Rectangle([7.52, 45.88, 8.07, 46.36]),#Zermatt
             'APPLY_BORDER_NOISE_CORRECTION': False,
             'APPLY_SPECKLE_FILTERING': True,
             'SPECKLE_FILTER_FRAMEWORK':'MULTI',
@@ -89,11 +90,11 @@ parameter = {  'START_DATE': '2018-01-01',
             'APPLY_TERRAIN_FLATTENING': True,
             'DEM': ee.Image('USGS/SRTMGL1_003'),
             'TERRAIN_FLATTENING_MODEL': 'VOLUME',
-            'TERRAIN_FLATTENING_ADDITIONAL_LAYOVER_SHADOW_BUFFER':0,
+            'TERRAIN_FLATTENING_ADDITIONAL_LAYOVER_SHADOW_BUFFER':1,
             'FORMAT': 'DB',
-            'CLIP_TO_ROI': False,
+            'CLIP_TO_ROI': True,
             'SAVE_ASSET': True,
-            'ASSET_ID': "users/mraj"
+            'ASSET_ID': "users/manutomk"
             }
 #processed s1 collection
 s1_processed = wp.s1_preproc(parameter)

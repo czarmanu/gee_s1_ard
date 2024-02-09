@@ -155,6 +155,7 @@ def s1_preproc(params):
     # select polarization
     if (POLARIZATION == 'VV'):
         s1 = s1.select(['VV', 'angle'])
+        #s1 = s1.select(['VV'])
     elif (POLARIZATION == 'VH'):
         s1 = s1.select(['VH', 'angle'])
     elif (POLARIZATION == 'VVVH'):
@@ -211,20 +212,31 @@ def s1_preproc(params):
             
         size = s1_1.size().getInfo()
         imlist = s1_1.toList(size)
+        dwnld_folder_name = "S1_ARD"
         for idx in range(0, size):
             img = imlist.get(idx)
-            img = ee.Image(img)
+            # to fixdata type error (Angle vs VV/VH) while exporting to Drive
+            img = ee.Image(img).float()
             name = str(img.id().getInfo())
             #name = str(idx)
             description = name           
             assetId = ASSET_ID+'/'+name
 
-            task = ee.batch.Export.image.toAsset(image=img,
-                                                 assetId=assetId,
+            #task = ee.batch.Export.image.toAsset(image=img,
+            #                                     assetId=assetId,
+            #                                     description=description,
+            #                                     region=s1_1.geometry(),
+            #                                     scale=10,
+            #                                     maxPixels=1e13)
+            
+            
+            task = ee.batch.Export.image.toDrive(image=img,
+                                                 folder=dwnld_folder_name,
                                                  description=description,
+                                                 crs='EPSG:32632',
                                                  region=s1_1.geometry(),
-                                                 scale=10,
-                                                 maxPixels=1e13)
+                                                 scale=10)
+            
             task.start()
             print('Exporting {} to {}'.format(name, assetId))
     return s1_1
