@@ -73,8 +73,7 @@ var parameter = {//1. Data Selection
               POLARIZATION:'VVVH',
               ORBIT : 'DESCENDING',
               //GEOMETRY: geometry, //uncomment if interactively selecting a region of interest
-              GEOMETRY: ee.Geometry.Polygon([[[104.80, 11.61],[104.80, 11.36],[105.16, 11.36],[105.16, 11.61]]], null, false), //Uncomment if providing coordinates
-              //GEOMETRY: ee.Geometry.Polygon([[[112.05, -0.25],[112.05, -0.45],[112.25, -0.45],[112.25, -0.25]]], null, false),
+              GEOMETRY: ee.Geometry.Polygon([[[7.52, 46.36],[7.52, 45.88],[8.07, 45.88],[8.07, 46.36]]], null, false), //Uncomment if providing coordinates
               //2. Additional Border noise correction
               APPLY_ADDITIONAL_BORDER_NOISE_CORRECTION: true,
               //3.Speckle filter
@@ -138,7 +137,7 @@ else {
 
 
 
-Map.centerObject(parameter.GEOMETRY, 12);
+Map.centerObject(parameter.GEOMETRY, 11);
 
 Map.addLayer(s1_view.first(), visparam, 'First image in the input S1 collection', true);
 Map.addLayer(s1_preprocces_view.first(), visparam, 'First image in the processed S1 collection', true);
